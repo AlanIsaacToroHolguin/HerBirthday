@@ -104,3 +104,20 @@ window.addEventListener('scroll', () => {
         scrolled = true;
     }
 });
+
+// Control de audio
+const audioToggle = document.getElementById('audioToggle');
+const backgroundMusic = document.getElementById('backgroundMusic');
+
+audioToggle.addEventListener('click', () => {
+    if (backgroundMusic.paused) {
+        backgroundMusic.play();
+        audioToggle.classList.remove('muted');
+    } else {
+        backgroundMusic.pause();
+        audioToggle.classList.add('muted');
+    }
+});
+
+// Iniciar con audio muteado
+audioToggle.classList.add('muted');

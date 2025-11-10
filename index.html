@@ -8,9 +8,22 @@
     
 </head>
 <body>
+    <!-- Control de audio -->
+    <button id="audioToggle" class="audio-toggle" aria-label="Controlar música">
+        <svg class="audio-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path class="speaker" d="M11 5L6 9H2v6h4l5 4V5z" fill="currentColor"/>
+            <path class="sound-waves" d="M15.54 8.46a5 5 0 0 1 0 7.07M18.36 5.64a9 9 0 0 1 0 12.72" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <line class="mute-line" x1="2" y1="2" x2="22" y2="22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+    </button>
+    <audio id="backgroundMusic" loop>
+        <source src="assets/musica-fondo1.mp3" type="audio/mpeg">
+    </audio>
+
     <!-- Partículas flotantes -->
     <div id="particles"></div>
 
+    
     <!-- Girasol que sigue el cursor -->
     <svg class="cursor-sunflower" id="cursorSunflower" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
         <circle cx="50" cy="50" r="12" fill="#8B4513"/>
@@ -38,7 +51,7 @@
                 <ellipse cx="35" cy="65" rx="10" ry="12" fill="#FFD700" transform="rotate(-45 35 65)"/>
                 <ellipse cx="65" cy="65" rx="10" ry="12" fill="#FFD700" transform="rotate(45 65 65)"/>
             </svg>
-            <h1>Feliz Cumpleaños Yuli</h1>
+            <h1>Feliz Cumpleaños Mi Yuls</h1>
             <p class="subtitle">Un día especial para alguien especial</p>
         </div>
         <div class="scroll-indicator"></div>

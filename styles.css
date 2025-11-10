@@ -462,3 +462,45 @@ html {
         opacity: 0;
     }
 }
+/* Control de audio */
+.audio-toggle {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 215, 0, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.audio-toggle:hover {
+    background: rgba(255, 215, 0, 0.2);
+    border-color: rgba(255, 215, 0, 0.5);
+    transform: scale(1.1);
+}
+
+.audio-icon {
+    width: 24px;
+    height: 24px;
+    color: #FFD700;
+}
+
+.audio-toggle.muted .sound-waves {
+    display: none;
+}
+
+.audio-toggle.muted .mute-line {
+    display: block;
+}
+
+.audio-toggle:not(.muted) .mute-line {
+    display: none;
+}
