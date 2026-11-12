@@ -2,190 +2,213 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feliz Cumpleaños Mi Cielo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#0a0a0a">
+    <title>Feliz cumpleaños, Yuls</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="preload" href="assets/fonts/playfair-italic.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="styles.css">
-
 </head>
-<body>
-    <!-- Control de audio -->
-    <button id="audioToggle" class="audio-toggle" aria-label="Controlar música">
+<body class="locked">
+
+    <!-- Gradientes compartidos por todos los girasoles -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+        <defs>
+            <linearGradient id="sfPetal" x1="0" y1="1" x2="0" y2="0">
+                <stop offset="0" stop-color="#F5A800"/>
+                <stop offset="1" stop-color="#FFE066"/>
+            </linearGradient>
+            <linearGradient id="sfPetalDeep" x1="0" y1="1" x2="0" y2="0">
+                <stop offset="0" stop-color="#D98200"/>
+                <stop offset="1" stop-color="#FFC107"/>
+            </linearGradient>
+            <radialGradient id="sfDisc" cx="0.5" cy="0.5" r="0.5">
+                <stop offset="0" stop-color="#7a4210"/>
+                <stop offset="0.6" stop-color="#4a260a"/>
+                <stop offset="1" stop-color="#2b1405"/>
+            </radialGradient>
+        </defs>
+    </svg>
+
+    <!-- Entrada: necesaria para que la música pueda sonar -->
+    <div class="gate" id="gate">
+        <div class="gate-inner">
+            <div class="sf-slot" data-sf="18" data-sf-class="sf-anim run gate-sf"></div>
+            <p class="gate-eyebrow">Para Yuls</p>
+            <button class="gate-btn" id="gateBtn" type="button">Abrir</button>
+            <p class="gate-hint">Mejor con sonido y sin prisa</p>
+        </div>
+    </div>
+
+    <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+    <button id="audioToggle" class="audio-toggle muted" type="button" aria-label="Controlar música">
         <svg class="audio-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path class="speaker" d="M11 5L6 9H2v6h4l5 4V5z" fill="currentColor"/>
+            <path d="M11 5L6 9H2v6h4l5 4V5z" fill="currentColor"/>
             <path class="sound-waves" d="M15.54 8.46a5 5 0 0 1 0 7.07M18.36 5.64a9 9 0 0 1 0 12.72" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
             <line class="mute-line" x1="2" y1="2" x2="22" y2="22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
         </svg>
     </button>
-    <audio id="backgroundMusic" loop>
+    <audio id="bgm" loop preload="none">
         <source src="assets/musica-fondo1.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Partículas flotantes -->
-    <div id="particles"></div>
+    <div id="fireflies" aria-hidden="true"></div>
+    <div class="cursor-sf" id="cursorSf" aria-hidden="true"></div>
 
-    <!-- Lluvia de pétalos -->
-    <div id="petals-layer"></div>
-
-    <!-- Girasol que sigue el cursor -->
-    <svg class="cursor-sunflower" id="cursorSunflower" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="50" cy="50" r="12" fill="#8B4513"/>
-        <ellipse cx="50" cy="32" rx="6" ry="12" fill="#FFD700"/>
-        <ellipse cx="50" cy="68" rx="6" ry="12" fill="#FFD700"/>
-        <ellipse cx="32" cy="50" rx="12" ry="6" fill="#FFD700"/>
-        <ellipse cx="68" cy="50" rx="12" ry="6" fill="#FFD700"/>
-        <ellipse cx="38" cy="38" rx="8" ry="10" fill="#FFD700" transform="rotate(45 38 38)"/>
-        <ellipse cx="62" cy="38" rx="8" ry="10" fill="#FFD700" transform="rotate(-45 62 38)"/>
-        <ellipse cx="38" cy="62" rx="8" ry="10" fill="#FFD700" transform="rotate(-45 38 62)"/>
-        <ellipse cx="62" cy="62" rx="8" ry="10" fill="#FFD700" transform="rotate(45 62 62)"/>
-    </svg>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container visible">
-            <svg class="sunflower-icon" id="heroSunflower" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <ellipse class="petal p1" cx="50" cy="28" rx="8" ry="16" fill="#FFD700"/>
-                <ellipse class="petal p2" cx="50" cy="72" rx="8" ry="16" fill="#FFD700"/>
-                <ellipse class="petal p3" cx="28" cy="50" rx="16" ry="8" fill="#FFD700"/>
-                <ellipse class="petal p4" cx="72" cy="50" rx="16" ry="8" fill="#FFD700"/>
-                <ellipse class="petal p5" cx="33" cy="33" rx="10" ry="14" fill="#FFD700" transform="rotate(45 33 33)"/>
-                <ellipse class="petal p6" cx="67" cy="33" rx="10" ry="14" fill="#FFD700" transform="rotate(-45 67 33)"/>
-                <ellipse class="petal p7" cx="33" cy="67" rx="10" ry="14" fill="#FFD700" transform="rotate(-45 33 67)"/>
-                <ellipse class="petal p8" cx="67" cy="67" rx="10" ry="14" fill="#FFD700" transform="rotate(45 67 67)"/>
-                <circle cx="50" cy="50" r="15" fill="#8B4513"/>
-                <circle cx="50" cy="50" r="9" fill="#5C2C0A" opacity="0.6"/>
-            </svg>
-            <h1>Feliz Cumpleaños Mi Yuls</h1>
-            <p class="subtitle">Para ti, mi cielo</p>
-        </div>
-        <div class="scroll-indicator"></div>
-    </section>
-
-    <!-- Sección 1: Mensaje personal -->
-    <section>
-        <div class="container">
-            <svg class="sunflower-bg left" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="50" cy="50" r="15" fill="#8B4513"/>
-                <ellipse cx="50" cy="30" rx="8" ry="15" fill="#FFD700"/>
-                <ellipse cx="50" cy="70" rx="8" ry="15" fill="#FFD700"/>
-                <ellipse cx="30" cy="50" rx="15" ry="8" fill="#FFD700"/>
-                <ellipse cx="70" cy="50" rx="15" ry="8" fill="#FFD700"/>
-            </svg>
-            <h2>Un día para celebrarte, mi cielo</h2>
-            <img src="assets/Miyuls.jpg" class="profile-image" alt="Foto especial">
-            <p>
-                Hoy es un día perfecto para recordarte lo <span class="highlight">increíble</span> que eres.
-                Tu forma de ver el mundo, tu energía y tu presencia hacen que cada momento junto a ti sea simplemente perfecto.
-            </p>
-            <p>
-                Admiro profundamente la persona en la que te has convertido. Tu dedicación, tu pasión por lo que haces
-                y la manera en que tocas las vidas de quienes te rodean es algo verdaderamente especial. Tenerte a mi lado
-                es el regalo más bonito que la vida me ha dado.
-            </p>
-            <div class="quote">
-                "Como los girasoles que buscan la luz, tú eres mi luz, mi cielo."
+    <main>
+        <!-- 1. Portada -->
+        <section class="scene hero" id="hero">
+            <div class="hero-inner">
+                <div class="sf-slot hero-sf" data-sf="24" data-sf-class="sf-anim"></div>
+                <h1>
+                    <span class="line">Feliz cumpleaños</span>
+                    <span class="line name">Yuls</span>
+                </h1>
             </div>
-            <p>
-                Espero que este nuevo año de vida te traiga todo lo que mereces: éxitos, felicidad y
-                momentos inolvidables juntos. Que cada día sea una oportunidad para brillar aún más, y que yo
-                pueda estar ahí para verte hacerlo.
-            </p>
-        </div>
-    </section>
+            <div class="scroll-cue" aria-hidden="true"><span>Desliza</span><i></i></div>
+        </section>
 
-    <!-- Sección 2: La psicóloga excepcional -->
-    <section>
-        <div class="container">
-            <svg class="sunflower-bg right" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="50" cy="50" r="15" fill="#8B4513"/>
-                <ellipse cx="50" cy="30" rx="8" ry="15" fill="#FFD700"/>
-                <ellipse cx="50" cy="70" rx="8" ry="15" fill="#FFD700"/>
-                <ellipse cx="30" cy="50" rx="15" ry="8" fill="#FFD700"/>
-                <ellipse cx="70" cy="50" rx="15" ry="8" fill="#FFD700"/>
-            </svg>
-            <h2>Tu pasión por ayudar</h2>
-            <p>
-                Tu trabajo como psicóloga es una inspiración. La <span class="highlight">empatía y profesionalismo</span>
-                con los que te entregas a cada persona que ayudas hablan mucho de quién eres, y me enamoran cada vez más.
-            </p>
-            <p>
-                No cualquiera tiene la capacidad de escuchar de verdad, de comprender sin juzgar,
-                y de guiar con sabiduría. Tu vocación es evidente en cada conversación, en cada gesto.
-                Soy el más afortunado de poder verte brillar en lo que amas hacer.
-            </p>
-            <div class="quote">
-                "El impacto que generas va más allá de lo profesional: tocas corazones, incluido el mío."
+        <!-- 2. Apertura -->
+        <section class="scene intro">
+            <div class="wrap narrow">
+                <p class="big" data-words>
+                    Hay fechas que no se pasan por alto, y la tuya es una de ellas.
+                    Hice esto con calma, para que lo recorras a tu ritmo.
+                </p>
             </div>
-            <p>
-                Cada logro que has alcanzado es resultado de tu esfuerzo y tu pasión.
-                Estoy seguro de que este nuevo año traerá aún más oportunidades para que sigas
-                <span class="highlight">brillando</span> en lo que tanto amas hacer, y estaré aquí para celebrar cada uno contigo.
-            </p>
-        </div>
-    </section>
+        </section>
 
-    <!-- Sección 3: Los girasoles -->
-    <section>
-        <div class="container">
-            <svg class="sunflower-bg left" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="50" cy="50" r="15" fill="#8B4513"/>
-                <ellipse cx="50" cy="30" rx="8" ry="15" fill="#FFD700"/>
-                <ellipse cx="50" cy="70" rx="8" ry="15" fill="#FFD700"/>
-                <ellipse cx="30" cy="50" rx="15" ry="8" fill="#FFD700"/>
-                <ellipse cx="70" cy="50" rx="15" ry="8" fill="#FFD700"/>
-            </svg>
-            <h2>Como los girasoles</h2>
-            <img src="assets/Yuls&Me.jpg" class="profile-image" alt="Nosotros">
-            <p>
-                Los girasoles tienen una cualidad hermosa: siempre <span class="highlight">buscan la luz</span>,
-                siempre crecen hacia el sol. Así eres tú: alguien que irradia luz propia y que me ilumina a mí también, mi cielo.
-            </p>
-            <p>
-                Tu energía positiva, tu inteligencia y tu forma de ser me inspiran cada día.
-                Cada conversación, cada risa compartida, cada momento a tu lado vale más de lo que cualquier palabra puede decir.
-            </p>
-            <div class="quote">
-                "En un mundo lleno de personas, tú simplemente destacas. Y tuve la suerte de elegirte y que me eligieras."
+        <!-- 3. Campo de girasoles interactivo -->
+        <section class="scene field" id="field">
+            <canvas id="fieldCanvas" aria-hidden="true"></canvas>
+            <div class="field-text">
+                <p class="eyebrow reveal">Un campo para ti</p>
+                <h2 class="reveal">Los girasoles siempre <em>buscan la luz</em></h2>
+                <p class="hint reveal" id="fieldHint">Mueve el cursor y mira hacia dónde miran</p>
             </div>
-            <p>
-                Tu autenticidad, tu forma de ver la vida y tu capacidad de hacer sentir bien a todos
-                son cualidades que no muchos poseen. Gracias por ser quien eres, y gracias por dejarme quererte.
-            </p>
-        </div>
-    </section>
+        </section>
 
-    <!-- Sección Final -->
-    <section class="final">
-        <div class="container">
-            <h2>Que sea un gran año</h2>
-            <p style="margin-bottom: 40px;">
-                Gracias por elegirme, mi cielo. Por dejarme ser parte de tu mundo y hacer de cada dia algo especial. No te vas a librar de mi tan facil.
-            </p>
-            <p style="margin-bottom: 40px; font-size: 1.6rem;">
-                Que este nuevo año te traiga todo lo que has soñado y más, y que yo pueda vivirlo contigo.
-            </p>
-            <p style="font-size: 2.5rem; font-weight: 300; letter-spacing: 0.1em; color: #FFD700;">
-                ¡Feliz Cumpleaños!
-            </p>
-
-            <!-- Contenedor centrado para girasol y botón -->
-            <div class="back-to-top-wrapper">
-                <svg class="final-sunflower" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="50" cy="50" r="15" fill="#8B4513"/>
-                    <ellipse cx="50" cy="30" rx="8" ry="15" fill="#FFD700"/>
-                    <ellipse cx="50" cy="70" rx="8" ry="15" fill="#FFD700"/>
-                    <ellipse cx="30" cy="50" rx="15" ry="8" fill="#FFD700"/>
-                    <ellipse cx="70" cy="50" rx="15" ry="8" fill="#FFD700"/>
-                    <ellipse cx="35" cy="35" rx="10" ry="12" fill="#FFD700" transform="rotate(45 35 35)"/>
-                    <ellipse cx="65" cy="35" rx="10" ry="12" fill="#FFD700" transform="rotate(-45 65 35)"/>
-                    <ellipse cx="35" cy="65" rx="10" ry="12" fill="#FFD700" transform="rotate(-45 35 65)"/>
-                    <ellipse cx="65" cy="65" rx="10" ry="12" fill="#FFD700" transform="rotate(45 65 65)"/>
-                </svg>
-
-                <a href="#" class="back-to-top" onclick="event.preventDefault(); window.scrollTo({top: 0, behavior: 'smooth'});">Volver al inicio</a>
+        <!-- 4. Ella -->
+        <section class="scene about">
+            <div class="wrap narrow">
+                <div class="copy center">
+                    <p class="eyebrow reveal">Tu luz</p>
+                    <h2 class="reveal">Entiendes a la gente <em>de verdad</em></h2>
+                    <p data-words>
+                        Intentas comprender a los demás aunque nadie te lo pida, y sé que a veces dices que eso
+                        pesa. Pero también es lo que te hace tan buena en lo que haces: no juzgas primero, buscas
+                        entender, y quienes han pasado por tu consultorio lo sienten: niños, adultos, todos.
+                    </p>
+                    <p data-words>
+                        Y este año lo hiciste todo a la vez: prácticas, universidad y trabajo, con horarios que
+                        a veces te obligaron a soltar cosas que querías. Seguiste firme. Eso no es suerte,
+                        es carácter.
+                    </p>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-<script src="script.js"></script>
+        <!-- 5. Lo que pocos ven, con la foto -->
+        <section class="scene about second">
+            <div class="wrap split">
+                <figure class="photo">
+                    <div class="frame"><img src="assets/yuls-1.jpeg" alt="Yuls riendo en la playa" style="object-position:50% 25%" data-parallax></div>
+                    <figcaption>Esa risa.</figcaption>
+                </figure>
+                <div class="copy">
+                    <p class="eyebrow reveal">Lo que pocos ven</p>
+                    <h2 class="reveal">Mucho más que <em>una cara seria</em></h2>
+                    <p data-words>
+                        Hay quien te ve seria y se queda ahí. Quien te conoce sabe que eres dulce, tierna, con
+                        una fragilidad muy linda y un humor que aparece sin avisar. Carismática sin esfuerzo.
+                    </p>
+                    <p data-words>
+                        Y curiosa: no descansas hasta saber de dónde era esa canción o dónde leíste aquello.
+                        Y haces unos rollos de canela que deberían tener fila.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Deseos -->
+        <section class="scene wishes">
+            <div class="wrap">
+                <div class="center">
+                    <p class="eyebrow reveal">Deseos</p>
+                    <h2 class="reveal">Abre cada <em>girasol</em></h2>
+                </div>
+                <div class="wish-grid reveal" id="wishGrid"></div>
+                <div class="wish-panel" id="wishPanel" aria-live="polite">
+                    <p class="wp-hint">Toca un girasol</p>
+                </div>
+                <p class="wish-count reveal"><span id="wishCount">0</span> de 6 abiertos</p>
+            </div>
+        </section>
+
+        <!-- 7a. Artista (verde, por su pañoleta de teatro) -->
+        <section class="scene artist">
+            <div class="wrap narrow center">
+                <p class="eyebrow reveal">Tu lado artista</p>
+                <h2 class="reveal">Y por dentro, <em>una artista</em></h2>
+                <svg class="ribbon reveal" viewBox="0 0 1200 60" preserveAspectRatio="none" aria-hidden="true"><path class="rb1"/><path class="rb2"/></svg>
+                <p class="artist-text" data-words>
+                    En el teatro de improvisación sales de tu zona de confort, te ríes, sientes sin pedir permiso
+                    y te conoces un poco más. Después de pasar tanto tiempo sosteniendo a los demás,
+                    ese espacio es solo tuyo. Ojalá lo tengas siempre.
+                </p>
+            </div>
+        </section>
+
+        <!-- 7b. El mar: un respiro corto, con olas -->
+        <section class="scene sea">
+            <div class="wrap narrow center">
+                <p class="sea-big" data-words>
+                    Eres como el mar: calma que se siente desde lejos y mucha profundidad por dentro.
+                    Ojalá tengas siempre tus noches tranquilas, con tu música, para soltar todo lo que cargas.
+                </p>
+                <p class="hint sea-hint reveal">Toca el agua</p>
+            </div>
+            <div class="waves" aria-hidden="true">
+                <svg class="wave w1" viewBox="0 0 1200 120" preserveAspectRatio="none"><path/></svg>
+                <svg class="wave w2" viewBox="0 0 1200 120" preserveAspectRatio="none"><path/></svg>
+                <svg class="wave w3" viewBox="0 0 1200 120" preserveAspectRatio="none"><path/></svg>
+            </div>
+        </section>
+
+        <!-- 7. La carta -->
+        <section class="scene letter-scene">
+            <div class="wrap narrow">
+                <div class="paper reveal">
+                    <p class="paper-title">Una cosa más, Yuls</p>
+                    <p class="paper-body" data-words>
+                        Sé que las cosas entre nosotros no están como antes, y no hice esto para pedirte nada.
+                        Es tu cumpleaños, un día importante para ti, y quería que supieras que te deseo,
+                        de corazón, el mejor de los cumpleaños. Que lo disfrutes, que te celebren y que te
+                        abracen bonito. No tienes que responder nada.
+                    </p>
+                    <p class="sign">Alan</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Final -->
+        <section class="scene final" id="final">
+            <div class="wrap narrow center">
+                <p class="final-lead reveal">Que este año te devuelva todo lo bonito que le das al mundo.</p>
+                <button class="candle reveal" id="candle" type="button" aria-label="Soplar la vela">
+                    <span class="glow"></span><span class="flame"></span><span class="smoke"></span>
+                    <span class="wick"></span><span class="body"></span>
+                </button>
+                <p class="candle-hint reveal" id="candleHint">Pide un deseo y toca la vela para soplarla</p>
+                <p class="final-title reveal" id="finalTitle">¡Feliz cumpleaños, Yuls!</p>
+                <a href="#hero" class="back-top reveal">Volver al inicio</a>
+                <p class="dated reveal">12 de noviembre de 2026</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
 </body>
 </html>
