@@ -3,7 +3,8 @@
 const $  = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
-const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+// La página se muestra igual en todos los equipos, aunque el sistema tenga las animaciones desactivadas
+const reduceMotion = false;
 const finePointer  = matchMedia('(hover: hover) and (pointer: fine)').matches;
 if (finePointer) document.documentElement.classList.add('fine-pointer');
 
